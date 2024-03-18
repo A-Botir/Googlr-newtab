@@ -7,11 +7,34 @@ import Pen from "../assets/pen.svg";
 import Plus from "../assets/plus.svg";
 import MeniIcon from "../assets/menu.svg";
 
+// localStorage.clear();
+
 const Main = ({ isModalVisible, showModal }) => {
   const [data, setData] = useState([]);
+  const [selectedItemIndex, setSelectedItemIndex] = useState(null);
 
   const handleButtonClick = () => {
     showModal();
+  };
+
+  const BtnDelete = (event, item) => {
+    event.preventDefault();
+    event.stopPropagation();
+    localStorage.removeItem(item.name);
+    setData((prevData) =>
+      prevData.filter((dataItem) => dataItem.name !== item.name),
+    );
+  };
+
+  const BtnChange = (ev) => {
+    ev.preventDefault();
+    ev.stopPropagation();
+  };
+
+  const BtnItemClick = (event, index) => {
+    event.preventDefault();
+    event.stopPropagation();
+    setSelectedItemIndex(index);
   };
 
   const OpenLink = ({ url, children }) => (
@@ -42,15 +65,15 @@ const Main = ({ isModalVisible, showModal }) => {
           <input
             type="search"
             id="search"
-            className="flex-grow bg-none outline-none"
+            className="flex-grow bg-none text-[#000000] outline-none placeholder:text-[#36464d]"
             placeholder="Search Google or type a URL"
           />
         </div>
         <div className="flex items-center gap-3">
-          <button>
+          <button className="outline-0">
             <img src={Voice} alt="voice icon" width={28} height={28} />
           </button>
-          <button>
+          <button className="outline-0">
             <img src={Camera} alt="camera icon" width={20} height={20} />
           </button>
         </div>
@@ -69,13 +92,33 @@ const Main = ({ isModalVisible, showModal }) => {
           <OpenLink key={index} url={item.url}>
             <button className="btn relative flex w-[124px] flex-col items-center justify-center gap-2 rounded-lg px-[18px] py-[10px] hover:bg-[#697b83]">
               <div className="mt-4 h-12 w-12 rounded-[50%] bg-[#18a51f] px-3 pb-3 pt-2">
-                <h2 className="align-middle text-[24px] font-bold">
+                <h2 className="align-middle text-[24px] font-bold uppercase">
                   {item.name[0]}
                 </h2>
               </div>
               <p className="text-[14px]">{item.name}</p>
-              <div className="btn_item absolute right-0 top-[2px] h-7 w-7 rounded-[50%] p-1 opacity-0 hover:bg-[#5f6d74]">
+              <button
+                type="button"
+                className="btn_item absolute right-0 top-[2px] h-7 w-7 rounded-[50%] p-1 hover:bg-[#5f6d74]"
+                onClick={(event) => BtnItemClick(event, index)}
+              >
                 <img src={MeniIcon} alt="menu icon" />
+              </button>
+              <div
+                className={`absolute left-[-30px] right-0 top-4 z-[4] rounded-md bg-white py-2 ${selectedItemIndex === index ? "" : "hidden"}`}
+              >
+                <button
+                  className="block w-full px-4 py-1 text-left text-[14px] text-black outline-0 hover:bg-[#7b878d]"
+                  onClick={BtnChange}
+                >
+                  Change shortcut
+                </button>
+                <button
+                  className="block w-full px-4 py-1 text-left text-[14px] text-black outline-0 hover:bg-[#7b878d]"
+                  onClick={(event) => BtnDelete(event, item)}
+                >
+                  Delete
+                </button>
               </div>
             </button>
           </OpenLink>

@@ -30,7 +30,7 @@ const Modal = ({ hideModal }) => {
 
   return (
     <form
-      className={`absolute left-[32%] top-[30%] mx-auto ${isVisible ? "block" : "hidden"} w-[36%] rounded-lg bg-white`}
+      className={`absolute left-[32%] top-[30%] z-[5] mx-auto ${isVisible ? "block" : "hidden"} w-[36%] rounded-lg bg-white`}
     >
       <div className="px-5 pb-6 pt-5">
         <h2 className="mb-4 text-[#202124]">New shortcut</h2>
