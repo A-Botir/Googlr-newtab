@@ -33,8 +33,4 @@
     margin: 0;
     padding: 0;
   }
-
-  .btn:hover ~ .btn_item {
-    display: block;
-  }
 }

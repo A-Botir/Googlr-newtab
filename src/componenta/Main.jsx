@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Tooltip from "@mui/material/Tooltip";
-import Button from "@material/core/Button";
-import Menu from "@material/Menu";
-import MenuItem from "@material/MenuItem";
 import Voice from "../assets/voice.svg";
 import Camera from "../assets/camera.png";
 import Search from "../assets/search.svg";
@@ -11,16 +8,6 @@ import Plus from "../assets/plus.svg";
 import MeniIcon from "../assets/menu.svg";
 
 const Main = ({ isModalVisible, showModal }) => {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
   const [data, setData] = useState([]);
 
   const handleButtonClick = () => {
@@ -44,7 +31,7 @@ const Main = ({ isModalVisible, showModal }) => {
   }, [isModalVisible]);
 
   return (
-    <section className="mt-32 w-full">
+    <section className="mt-32 w-full pb-[7px]">
       <div className="mx-auto mb-8 h-24 w-[275px] bg-[url('./assets/google.svg')] bg-contain bg-no-repeat"></div>
       <label
         htmlFor="search"

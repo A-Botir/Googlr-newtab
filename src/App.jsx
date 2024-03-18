@@ -15,7 +15,7 @@ const App = () => {
   };
 
   return (
-    <div className="relative mx-auto h-screen w-full bg-slate-600 px-3">
+    <div className="relative mx-auto w-full bg-slate-600 px-3">
       <Header />
       <Main isModalVisible={isModalVisible} showModal={showModal} />
       {isModalVisible && <Modal hideModal={hideModal} />}
